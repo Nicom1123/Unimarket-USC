@@ -96,6 +96,7 @@
         android:layout_marginTop="40dp"
         android:layout_marginEnd="120dp"
         android:text="@string/Registrate"
+        android:textColor="#FF0000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Iniciar_sesion" />
 
