@@ -60,16 +60,17 @@
             <!-- Campos de texto con subrayado gris y hint gris -->
             <EditText
                 android:id="@+id/etName"
-                style="@style/Widget.AppCompat.EditText.Underlined"
+                android:background="@drawable/edittext_underline"
+                android:paddingVertical="12dp"
+                android:layout_marginBottom="12dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Nombre Completo"
-                android:paddingVertical="12dp"
-                android:layout_marginBottom="12dp"/>
+                />
 
             <EditText
                 android:id="@+id/etDoc"
-                style="@style/Widget.AppCompat.EditText.Underlined"
+                android:background="@drawable/edittext_underline"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Documento de Identificación"
@@ -79,7 +80,7 @@
 
             <EditText
                 android:id="@+id/etEmail"
-                style="@style/Widget.AppCompat.EditText.Underlined"
+                android:background="@drawable/edittext_underline"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Correo Institucional"
@@ -89,7 +90,7 @@
 
             <EditText
                 android:id="@+id/etPassword"
-                style="@style/Widget.AppCompat.EditText.Underlined"
+                android:background="@drawable/edittext_underline"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Contraseña"
@@ -99,7 +100,7 @@
 
             <EditText
                 android:id="@+id/etConfirmPwd"
-                style="@style/Widget.AppCompat.EditText.Underlined"
+                android:background="@drawable/edittext_underline"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Confirmar contraseña"
@@ -109,7 +110,7 @@
 
             <EditText
                 android:id="@+id/etPhone"
-                style="@style/Widget.AppCompat.EditText.Underlined"
+                android:background="@drawable/edittext_underline"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Número de contacto (opcional)"
