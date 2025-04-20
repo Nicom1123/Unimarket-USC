@@ -3,4 +3,7 @@
     <string name="texto_inicio1">Encuentra lo que necesitas, vende lo que no usas</string>
     <string name="texto_inicio2">Compra, vende e intercambia productos con otros estudiantes de la USC de manera rápida y segura.</string>
     <string name="boton_iniciarsesion">Iniciar sesion</string>
+    <string name="ingresado_aun">¿No has ingresado aun?</string>
+    <string name="Transformacion_buengobierno">Transformacion y Buen Gobierno</string>
+    <string name="Registrate">Registrate</string>
 </resources>

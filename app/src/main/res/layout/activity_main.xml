@@ -41,7 +41,6 @@
         android:id="@+id/Texto_inicio2"
         android:layout_width="317dp"
         android:layout_height="37dp"
-        android:layout_marginTop="16dp"
         android:text="@string/texto_inicio2"
         app:layout_constraintBottom_toTopOf="@+id/Iniciar_sesion"
         app:layout_constraintEnd_toEndOf="parent"
@@ -52,10 +51,53 @@
         android:id="@+id/Iniciar_sesion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
         android:text="@string/boton_iniciarsesion"
+        app:layout_constraintBottom_toTopOf="@+id/ingresado_aun"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="526dp" />
+        app:layout_constraintTop_toBottomOf="@+id/Texto_inicio2" />
+
+    <TextView
+        android:id="@+id/ingresado_aun"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="68dp"
+        android:layout_marginBottom="28dp"
+        android:text="@string/ingresado_aun"
+        app:layout_constraintBottom_toTopOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="82dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/usc_logo" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:text="@string/Transformacion_buengobierno"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.11"
+        app:layout_constraintStart_toEndOf="@+id/imageView" />
+
+    <TextView
+        android:id="@+id/Registrate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="120dp"
+        android:text="@string/Registrate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Iniciar_sesion" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
