@@ -13,10 +13,12 @@
     <string name="Nombre_completo">Nombre Completo</string>
     <string name="Correo_Institucional">Correo Institucional</string>
     <string name="Documento_Identificacion">Documento de Identificacion</string>
+    <string name="Número_contacto">Número de contacto (opcional)</string>
     <string name="Correctamente">Acuerdate de ingresar tu Usuario y Contraseña correctamente</string>
     <string name="Contraseña">Contraseña</string>
     <string name="Confirmar_contraseña">Confirmar Contraseña</string>
     <string name="Contraseña_Incorrecta">Contraseña Incorrecta</string>"
     <string name="Olvidaste_tu_contraseña">¿Olvidaste tu contraseña?</string>
-    <string name="Terminos_condiciones">Al registrarte, aceptas los términos y condiciones de uso.</string>
+    <string name="Conexion_USC">Acepto la verificacion de mi informacion para comprobar mi conexion con la USC</string>
+    <string name="Terminos_condiciones">Acepto terminos y condiciones</string>
 </resources>
