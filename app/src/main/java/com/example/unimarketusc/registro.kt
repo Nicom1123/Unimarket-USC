@@ -1,5 +1,6 @@
 package com.example.unimarketusc
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.CheckBox
@@ -7,6 +8,12 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import okhttp3.FormBody
+import okhttp3.OkHttpClient
+import okhttp3.Response
+import org.json.JSONObject
+import okhttp3.*
+import java.io.IOException
 
 class registro : AppCompatActivity() {
     private lateinit var etName: EditText
@@ -23,7 +30,7 @@ class registro : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.registro)
 
-        // 1. Bind views
+        // Vinculación de vistas
         etName        = findViewById(R.id.etName)
         etDoc         = findViewById(R.id.etDoc)
         etEmail       = findViewById(R.id.etEmail)
@@ -34,56 +41,105 @@ class registro : AppCompatActivity() {
         btnRegister   = findViewById(R.id.btnRegister)
         btnBack       = findViewById(R.id.btnBack)
 
-        // 2. Botón "volver"
         btnBack.setOnClickListener { finish() }
 
-        // 3. Validación y registro
         btnRegister.setOnClickListener {
-            // 3.1 Campos obligatorios
-            if (etName.text.isBlank() || etDoc.text.isBlank() ||
-                etEmail.text.isBlank() || etPassword.text.isBlank() ||
-                etConfirmPwd.text.isBlank()) {
+            val name = etName.text.toString().trim()
+            val doc = etDoc.text.toString().trim()
+            val email = etEmail.text.toString().trim()
+            val pwd = etPassword.text.toString()
+            val confirmPwd = etConfirmPwd.text.toString()
+
+            // Validaciones
+            if (name.isEmpty() || doc.isEmpty() || email.isEmpty() || pwd.isEmpty() || confirmPwd.isEmpty()) {
                 Toast.makeText(this, "Faltan datos por llenar", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            // 3.2 Checkboxes obligatorias
             if (!cbVerifyUSC.isChecked || !cbTerms.isChecked) {
                 Toast.makeText(this, "Debe aceptar ambas casillas", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            // 3.3 Correo institucional
-            val email = etEmail.text.toString().trim()
             if (!email.endsWith("@usc.edu.co")) {
-                etEmail.error = "Debe usar un correo @usc.edu.co"
+                etEmail.error = "Debe usar un correo institucional"
                 return@setOnClickListener
             }
 
-            // 3.4 Contraseñas iguales
-            val pwd  = etPassword.text.toString()
-            val pwd2 = etConfirmPwd.text.toString()
-            if (pwd != pwd2) {
+            if (pwd != confirmPwd) {
                 etConfirmPwd.error = "Las contraseñas no coinciden"
                 return@setOnClickListener
             }
 
-            // 3.5 Aquí llamas a tu verificación en MySQL vía PHP/Retrofit...
-            verificarEstudianteYRegistrar(
-                nombre = etName.text.toString(),
-                documento = etDoc.text.toString(),
-                email = email,
-                password = pwd
-            )
+            // Llamar verificación y registro
+            verificarEstudianteYRegistrar(doc, email, pwd)
         }
     }
 
-    private fun verificarEstudianteYRegistrar(nombre: String, documento: String, email: String, password: String) {
-        // EJEMPLO con Retrofit (simplificado):
-        // 1) Llamada a verify_student.php que recibe documento+email → devuelve success: true/false
-        // 2) Si true, llamas a register.php que inserta en la otra BD → devuelve success
-        // 3) Si todo ok, lanzas Intent a InicioSesionActivity
+    private fun verificarEstudianteYRegistrar(documento: String, email: String, password: String) {
+        val client = OkHttpClient()
 
-        // ... implementación de tu cliente HTTP aquí ...
+        val formVerify = FormBody.Builder()
+            .add("documento", documento)
+            .add("email", email)
+            .build()
+
+        val requestVerify = Request.Builder()
+            .url("http://192.168.0.10/unimarket_usc/verify_student.php")
+            .post(formVerify)
+            .build()
+
+        client.newCall(requestVerify).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                runOnUiThread {
+                    Toast.makeText(this@registro, "Error de conexión", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                val res = response.body?.string()
+                val json = JSONObject(res ?: "{}")
+
+                if (json.getBoolean("success")) {
+                    // Verificado en la BD de estudiantes, ahora registrar
+                    val formRegister = FormBody.Builder()
+                        .add("documento", documento)
+                        .add("email", email)
+                        .add("password", password)
+                        .build()
+
+                    val requestRegister = Request.Builder()
+                        .url("http://192.168.0.10/unimarket_usc/register.php")
+                        .post(formRegister)
+                        .build()
+
+                    client.newCall(requestRegister).enqueue(object : Callback {
+                        override fun onFailure(call: Call, e: IOException) {
+                            runOnUiThread {
+                                Toast.makeText(this@registro, "Error al registrar", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+
+                        override fun onResponse(call: Call, response: Response) {
+                            val jsonReg = JSONObject(response.body?.string() ?: "{}")
+                            runOnUiThread {
+                                if (jsonReg.getBoolean("success")) {
+                                    Toast.makeText(this@registro, "Registro exitoso", Toast.LENGTH_SHORT).show()
+                                    startActivity(Intent(this@registro, inicio_sesion::class.java))
+                                    finish()
+                                } else {
+                                    Toast.makeText(this@registro, "Error al guardar", Toast.LENGTH_SHORT).show()
+                                }
+                            }
+                        }
+                    })
+
+                } else {
+                    runOnUiThread {
+                        Toast.makeText(this@registro, "Usuario no encontrado en base de datos USC", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        })
     }
 }
