@@ -12,6 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UnimarketUSC"
         tools:targetApi="31">
+        <activity android:name=".registro" />
+        <activity android:name=".inicio_sesion" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
