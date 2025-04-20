@@ -1,20 +1,30 @@
 package com.example.unimarketusc
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
+import android.widget.Button
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_main)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+
+        // 1. Buscar los botones por su ID
+        val btnIniciarSesion = findViewById<Button>(R.id.Iniciar_sesion)
+        val txtRegistrate = findViewById<TextView>(R.id.Registrate)
+
+        // 2. Cuando se presione "Iniciar sesión"
+        btnIniciarSesion.setOnClickListener {
+            val intent = Intent(this, inicio_sesion::class.java)
+            startActivity(intent)
+        }
+
+        // 3. Cuando se presione "Regístrate"
+        txtRegistrate.setOnClickListener {
+            val intent = Intent(this, registro::class.java)
+            startActivity(intent)
         }
     }
 }
