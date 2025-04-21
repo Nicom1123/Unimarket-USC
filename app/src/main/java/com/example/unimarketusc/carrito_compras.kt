@@ -1,4 +1,11 @@
 package com.example.unimarketusc
 
-class carrito_compras {
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+
+class carrito_compras: AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.menu)
+    }
 }
