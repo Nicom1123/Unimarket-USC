@@ -38,6 +38,13 @@ class inicio_sesion : AppCompatActivity() {
             cbRecordarme.isChecked = true
         }
 
+        val btnBack = findViewById<ImageButton>(R.id.btnBack)
+        btnBack.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+            startActivity(intent)
+            finish()
+        }
         // Botón "Iniciar Sesión"
         btnIniciar.setOnClickListener {
             val email = etCorreo.text.toString()
