@@ -21,4 +21,9 @@
     <string name="Olvidaste_tu_contraseña">¿Olvidaste tu contraseña?</string>
     <string name="Conexion_USC">Acepto la verificacion de mi informacion para comprobar mi conexion con la USC</string>
     <string name="Terminos_condiciones">Acepto terminos y condiciones</string>
+    <string name="punto">.</string>
+    <string name="Ubicacion">Ubicacion</string>
+    <string name="Buscar_en_CyberFruver">Buscar</string>
+    <string name="Carrito">Carrito</string>
+
 </resources>
