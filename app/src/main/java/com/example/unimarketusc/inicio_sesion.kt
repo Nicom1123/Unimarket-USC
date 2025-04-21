@@ -82,6 +82,9 @@ class inicio_sesion : AppCompatActivity() {
                                     .apply()
                             }
                             Toast.makeText(this@inicio_sesion, "Inicio exitoso", Toast.LENGTH_SHORT).show()
+                            val intent = Intent(this@inicio_sesion, menu::class.java)
+                            startActivity(intent)
+                            finish()
                             // Ir a otra actividad si quieres
                         } else {
                             Toast.makeText(this@inicio_sesion, "Credenciales incorrectas", Toast.LENGTH_SHORT).show()
