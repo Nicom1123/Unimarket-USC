@@ -33,5 +33,8 @@
     <string name="Cerrar_sesion">Cerrar sesión</string>
     <string name="Pagar">Pagar</string>
     <string name="ARTICULOS">ARTICULOS</string>
+    <string name="Texto_recuperarcontraseña">A veces pasa, escribe tu correo y nosotros nos encargamos del resto</string>
+    <string name="Texto_recuperarcontraseña2">Ingresa el código que hemos enviado a tu correo electrónico y podrás cambiar tu contraseña.</string>
+    <string name="Cambiado_contraseña">¡Has cambiado tu contraseña correctamente!</string>
 
 </resources>
