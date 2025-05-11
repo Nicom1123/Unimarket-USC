@@ -32,6 +32,6 @@
     <string name="Perfil">Perfil</string>
     <string name="Cerrar_sesion">Cerrar sesión</string>
     <string name="Pagar">Pagar</string>
-    <string name="Carrito">Carrito</string>
+    <string name="ARTICULOS">ARTICULOS</string>
 
 </resources>
