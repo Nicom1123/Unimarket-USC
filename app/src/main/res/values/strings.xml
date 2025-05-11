@@ -25,5 +25,13 @@
     <string name="Ubicacion">Ubicacion</string>
     <string name="Buscar_en_CyberFruver">Buscar</string>
     <string name="Carrito">Carrito</string>
+    <string name="ingresa_codigo">Ingresa el código que hemos enviado a tu correo electrónico para verificar tu cuenta</string>
+    <string name="Verificar_cuenta">Verificar cuenta</string>
+    <string name="Confirmar_código">Confirmar código</string>
+    <string name="Historial">Historial</string>
+    <string name="Perfil">Perfil</string>
+    <string name="Cerrar_sesion">Cerrar sesión</string>
+    <string name="Pagar">Pagar</string>
+    <string name="Carrito">Carrito</string>
 
 </resources>
