@@ -85,7 +85,7 @@ class registro : AppCompatActivity() {
             .build()
 
         val requestVerify = Request.Builder()
-            .url("http://10.0.2.2/unimarket_usc/verify_student.php")
+            .url("http://127.0.0.1/unimarket_usc/verify_student.php")
             .post(formVerify)
             .build()
 
@@ -109,7 +109,7 @@ class registro : AppCompatActivity() {
                         .build()
 
                     val requestRegister = Request.Builder()
-                        .url("http://10.0.2.2/unimarket_usc/register.php")
+                        .url("http://127.0.0.1/unimarket_usc/register.php")
                         .post(formRegister)
                         .build()
 
