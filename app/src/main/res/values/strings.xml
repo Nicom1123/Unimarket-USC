@@ -33,8 +33,13 @@
     <string name="Cerrar_sesion">Cerrar sesión</string>
     <string name="Pagar">Pagar</string>
     <string name="ARTICULOS">ARTICULOS</string>
-    <string name="Texto_recuperarcontraseña">A veces pasa, escribe tu correo y nosotros nos encargamos del resto</string>
+    <string name="Texto_recuperarcontraseña">No te preocupes, suele pasar, escribe tu correo y nosotros nos encargamos del resto</string>
     <string name="Texto_recuperarcontraseña2">Ingresa el código que hemos enviado a tu correo electrónico y podrás cambiar tu contraseña.</string>
     <string name="Cambiado_contraseña">¡Has cambiado tu contraseña correctamente!</string>
+    <string name="Recuperar_contraseña">Recuperar contraseña</string>
+    <string name="Enviar_codigo">Enviar código de recuperación</string>
+    <string name="Ingresa_nueva_contraseña">Ingresa tu nueva contraseña</string>
+        <string name="Contraseña_nueva">Contraseña nueva</string>
+    <string name="Confirmar_nueva_contraseña">Confirmar nueva contraseña</string>
 
 </resources>

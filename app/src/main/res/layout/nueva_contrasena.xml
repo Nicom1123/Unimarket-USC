@@ -14,7 +14,7 @@
         android:layout_marginTop="28dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Btnvolver"
-        app:srcCompat="@drawable/confundido" />
+        app:srcCompat="@drawable/decoracion_recuperar_contrase_a" />
 
     <ImageButton
         android:id="@+id/Btnvolver"
@@ -28,8 +28,8 @@
         app:srcCompat="@drawable/ic_arrow_back" />
 
     <LinearLayout
-        android:layout_width="410dp"
-        android:layout_height="352dp"
+        android:layout_width="413dp"
+        android:layout_height="347dp"
         android:layout_marginTop="12dp"
         android:background="#FFFFFF"
         android:orientation="vertical"
@@ -49,27 +49,33 @@
         <TextView
             android:id="@+id/textView3"
             android:layout_width="match_parent"
-            android:layout_height="55dp"
+            android:layout_height="40dp"
             android:gravity="center|top"
-            android:text="@string/Texto_recuperarcontraseña" />
+            android:text="@string/Ingresa_nueva_contraseña" />
 
         <EditText
-            android:id="@+id/Correo_institucional"
+            android:id="@+id/Nueva_contraseña"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:ems="10"
-            android:hint="@string/Correo_Institucional"
-            android:inputType="textEmailAddress" />
+            android:hint="@string/Contraseña_nueva"
+            android:inputType="textPassword" />
+
+        <EditText
+            android:id="@+id/Confirmar_nueva_contraseña"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:ems="10"
+            android:hint="@string/Confirmar_contraseña"
+            android:inputType="textPassword" />
 
         <Button
             android:id="@+id/button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#000000"
-            android:text="@string/Enviar_codigo"
+            android:text="@string/Confirmar_nueva_contraseña"
             android:textColor="@color/blanco" />
 
     </LinearLayout>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
