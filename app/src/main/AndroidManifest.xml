@@ -19,6 +19,11 @@
         <activity android:name=".olvidaste_contrasena" />
         <activity android:name=".carrito_compras" />
         <activity android:name=".usuario" />
+        <activity android:name=".categoria_tecnologia" />
+        <activity android:name=".categoria_libreria" />
+        <activity android:name=".categoria_ropa" />
+        <activity android:name=".categoria_papeleria" />
+        <activity android:name=".perfil" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
