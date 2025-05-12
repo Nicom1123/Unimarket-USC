@@ -1,4 +1,11 @@
 package com.example.unimarketusc
 
-class categoria_libreria {
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+
+class categoria_libreria : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.categoria_libreria)
+    }
 }
