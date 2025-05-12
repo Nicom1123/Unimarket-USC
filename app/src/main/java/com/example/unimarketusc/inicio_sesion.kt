@@ -64,7 +64,7 @@ class inicio_sesion : AppCompatActivity() {
                 .build()
 
             val request = Request.Builder()
-                .url("http://192.168.0.10/unimarket_usc/login.php") // 10.0.2.2 = localhost en emulador
+                .url("http://192.168.56.1/unimarket_usc/login.php") // 10.0.2.2 = localhost en emulador
                 .post(form)
                 .build()
 
