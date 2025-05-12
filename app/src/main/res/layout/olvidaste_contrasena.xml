@@ -28,11 +28,12 @@
         app:srcCompat="@drawable/ic_arrow_back" />
 
     <LinearLayout
-        android:layout_width="410dp"
-        android:layout_height="352dp"
+        android:layout_width="408dp"
+        android:layout_height="351dp"
         android:layout_marginTop="12dp"
         android:background="#FFFFFF"
         android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -62,11 +63,11 @@
             android:inputType="textEmailAddress" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/btnEnviar_correo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#000000"
-            android:text="@string/Enviar_codigo"
+            android:text="@string/Enviar_correo"
             android:textColor="@color/blanco" />
 
     </LinearLayout>
