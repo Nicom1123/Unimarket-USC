@@ -14,6 +14,8 @@ class menu : AppCompatActivity() {
         val btnUsuario = findViewById<ImageView>(R.id.btnUsuario)
         val imgCategoriaTecnologia = findViewById<ImageView>(R.id.imgCategoriaTecnologia)
         val imgCategoriaLibreria = findViewById<ImageView>(R.id.imgCategoriaLibreria)
+        val imgCategoriaRopa = findViewById<ImageView>(R.id.imgCategoriaRopa)
+        val imgCategoriaPapeleria = findViewById<ImageView>(R.id.imgCategoriaPapeleria)
 
         btnCarrito.setOnClickListener {
             val intent = Intent(this, carrito_compras::class.java)
@@ -33,6 +35,16 @@ class menu : AppCompatActivity() {
 
         imgCategoriaLibreria.setOnClickListener {
             val intent = Intent(this, categoria_libreria::class.java)
+            startActivity(intent)
+        }
+
+        imgCategoriaRopa.setOnClickListener {
+            val intent = Intent(this, categoria_ropa::class.java)
+            startActivity(intent)
+        }
+
+        imgCategoriaPapeleria.setOnClickListener {
+            val intent = Intent(this, categoria_papeleria::class.java)
             startActivity(intent)
         }
 
