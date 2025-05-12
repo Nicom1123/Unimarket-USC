@@ -69,27 +69,25 @@ class registro : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            enviarCorreoDeActivacion(email)
+            enviarCorreoDeActivacion(email, pwd)
         }
     }
 
-    private fun enviarCorreoDeActivacion(correo: String) {
-        val url = "http://192.168.56.1/unimarket_usc/enviar_correo.php?correo=$correo"
+    private fun enviarCorreoDeActivacion(correo: String, clave: String) {
+        val claveSha1 = sha1(clave)
+        val url = "http://192.168.0.10/unimarket_usc/enviar_correo.php?correo=$correo&clave=$claveSha1"
 
         val queue = Volley.newRequestQueue(this)
         val request = StringRequest(
             Request.Method.GET, url,
             { response ->
                 Toast.makeText(this, "Revisa tu correo para activar tu cuenta", Toast.LENGTH_LONG).show()
-                // Puedes redirigir al login o dejar al usuario en esta pantalla
-                // startActivity(Intent(this, inicio_sesion::class.java))
-                // finish()
             },
             { error ->
                 Toast.makeText(this, "Error al enviar el correo: ${error.message}", Toast.LENGTH_SHORT).show()
             }
         )
-
         queue.add(request)
     }
+
 }
