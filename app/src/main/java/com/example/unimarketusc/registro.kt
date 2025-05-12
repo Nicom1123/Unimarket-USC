@@ -2,18 +2,11 @@ package com.example.unimarketusc
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
-import android.widget.CheckBox
-import android.widget.EditText
-import android.widget.ImageButton
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import okhttp3.FormBody
-import okhttp3.OkHttpClient
-import okhttp3.Response
-import org.json.JSONObject
-import okhttp3.*
-import java.io.IOException
+import com.android.volley.Request
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 
 class registro : AppCompatActivity() {
     private lateinit var etName: EditText
@@ -26,11 +19,16 @@ class registro : AppCompatActivity() {
     private lateinit var btnRegister: Button
     private lateinit var btnBack: ImageButton
 
+    private fun sha1(input: String): String {
+        val digest = java.security.MessageDigest.getInstance("SHA-1")
+        val result = digest.digest(input.toByteArray(Charsets.UTF_8))
+        return result.joinToString("") { "%02x".format(it) }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.registro)
 
-        // Vinculación de vistas
         etName        = findViewById(R.id.etName)
         etDoc         = findViewById(R.id.etDoc)
         etEmail       = findViewById(R.id.etEmail)
@@ -71,75 +69,27 @@ class registro : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            // Llamar verificación y registro
-            verificarEstudianteYRegistrar(doc, email, pwd)
+            enviarCorreoDeActivacion(email)
         }
     }
 
-    private fun verificarEstudianteYRegistrar(documento: String, email: String, password: String) {
-        val client = OkHttpClient()
+    private fun enviarCorreoDeActivacion(correo: String) {
+        val url = "http://192.168.56.1/unimarket_usc/enviar_correo.php?correo=$correo"
 
-        val formVerify = FormBody.Builder()
-            .add("documento", documento)
-            .add("email", email)
-            .build()
-
-        val requestVerify = Request.Builder()
-            .url("http://127.0.0.1/unimarket_usc/verify_student.php")
-            .post(formVerify)
-            .build()
-
-        client.newCall(requestVerify).enqueue(object : Callback {
-            override fun onFailure(call: Call, e: IOException) {
-                runOnUiThread {
-                    Toast.makeText(this@registro, "Error de conexión", Toast.LENGTH_SHORT).show()
-                }
+        val queue = Volley.newRequestQueue(this)
+        val request = StringRequest(
+            Request.Method.GET, url,
+            { response ->
+                Toast.makeText(this, "Revisa tu correo para activar tu cuenta", Toast.LENGTH_LONG).show()
+                // Puedes redirigir al login o dejar al usuario en esta pantalla
+                // startActivity(Intent(this, inicio_sesion::class.java))
+                // finish()
+            },
+            { error ->
+                Toast.makeText(this, "Error al enviar el correo: ${error.message}", Toast.LENGTH_SHORT).show()
             }
+        )
 
-            override fun onResponse(call: Call, response: Response) {
-                val res = response.body?.string()
-                val json = JSONObject(res ?: "{}")
-
-                if (json.getBoolean("success")) {
-                    // Verificado en la BD de estudiantes, ahora registrar
-                    val formRegister = FormBody.Builder()
-                        .add("documento", documento)
-                        .add("email", email)
-                        .add("password", password)
-                        .build()
-
-                    val requestRegister = Request.Builder()
-                        .url("http://127.0.0.1/unimarket_usc/register.php")
-                        .post(formRegister)
-                        .build()
-
-                    client.newCall(requestRegister).enqueue(object : Callback {
-                        override fun onFailure(call: Call, e: IOException) {
-                            runOnUiThread {
-                                Toast.makeText(this@registro, "Error al registrar", Toast.LENGTH_SHORT).show()
-                            }
-                        }
-
-                        override fun onResponse(call: Call, response: Response) {
-                            val jsonReg = JSONObject(response.body?.string() ?: "{}")
-                            runOnUiThread {
-                                if (jsonReg.getBoolean("success")) {
-                                    Toast.makeText(this@registro, "Registro exitoso", Toast.LENGTH_SHORT).show()
-                                    startActivity(Intent(this@registro, inicio_sesion::class.java))
-                                    finish()
-                                } else {
-                                    Toast.makeText(this@registro, "Error al guardar", Toast.LENGTH_SHORT).show()
-                                }
-                            }
-                        }
-                    })
-
-                } else {
-                    runOnUiThread {
-                        Toast.makeText(this@registro, "Usuario no encontrado en base de datos USC", Toast.LENGTH_SHORT).show()
-                    }
-                }
-            }
-        })
+        queue.add(request)
     }
 }
