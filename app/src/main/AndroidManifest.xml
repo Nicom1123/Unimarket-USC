@@ -16,6 +16,7 @@
         <activity android:name=".registro" />
         <activity android:name=".inicio_sesion" />
         <activity android:name=".menu" />
+        <activity android:name=".olvidaste_contrasena" />
         <activity android:name=".carrito_compras" />
         <activity android:name=".usuario" />
         <activity
