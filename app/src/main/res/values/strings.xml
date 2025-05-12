@@ -41,5 +41,6 @@
     <string name="Ingresa_nueva_contraseña">Ingresa tu nueva contraseña</string>
         <string name="Contraseña_nueva">Contraseña nueva</string>
     <string name="Confirmar_nueva_contraseña">Confirmar nueva contraseña</string>
+    <string name="Texto_nueva_contraseña">Inicia sesión ahora mismo para ingresar a Unimarket USC</string>
 
 </resources>
