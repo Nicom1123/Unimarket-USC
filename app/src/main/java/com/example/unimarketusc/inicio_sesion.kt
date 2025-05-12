@@ -20,6 +20,12 @@ class inicio_sesion : AppCompatActivity() {
     private lateinit var cbRecordarme: CheckBox
     private lateinit var tvOlvidaste: TextView
 
+    private fun sha1(input: String): String {
+        val digest = java.security.MessageDigest.getInstance("SHA-1")
+        val result = digest.digest(input.toByteArray(Charsets.UTF_8))
+        return result.joinToString("") { "%02x".format(it) }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.inicio_sesion)
@@ -48,7 +54,8 @@ class inicio_sesion : AppCompatActivity() {
         // Botón "Iniciar Sesión"
         btnIniciar.setOnClickListener {
             val email = etCorreo.text.toString()
-            val pwd = etPassword.text.toString()
+            val rawPwd = etPassword.text.toString()
+            val pwd = sha1(rawPwd)  // Contraseña encriptada
 
             val client = OkHttpClient()
             val form = FormBody.Builder()
