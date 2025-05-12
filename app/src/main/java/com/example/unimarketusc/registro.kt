@@ -75,13 +75,13 @@ class registro : AppCompatActivity() {
 
     private fun enviarCorreoDeActivacion(correo: String, clave: String) {
         val claveSha1 = sha1(clave)
-        val url = "http://192.168.0.10/unimarket_usc/enviar_correo.php?correo=$correo&clave=$claveSha1"
+        val url = "http://192.168.56.1/unimarket_usc/enviar_correo.php?correo=$correo&clave=$claveSha1"
 
         val queue = Volley.newRequestQueue(this)
         val request = StringRequest(
             Request.Method.GET, url,
             { response ->
-                Toast.makeText(this, "Revisa tu correo para activar tu cuenta", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, response, Toast.LENGTH_LONG).show()
             },
             { error ->
                 Toast.makeText(this, "Error al enviar el correo: ${error.message}", Toast.LENGTH_SHORT).show()
