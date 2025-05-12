@@ -98,12 +98,7 @@
                             android:src="@drawable/tecnologia"
                             android:contentDescription="Tecnología" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Tecnología"
-                            android:textColor="#00BCD4"
-                            android:textStyle="bold" />
+
                     </LinearLayout>
 
                     <!-- Librería -->
@@ -120,12 +115,7 @@
                             android:src="@drawable/libreria"
                             android:contentDescription="Librería" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Librería"
-                            android:textColor="#9C27B0"
-                            android:textStyle="bold" />
+
                     </LinearLayout>
 
                     <!-- Papelería -->
@@ -142,12 +132,7 @@
                             android:src="@drawable/papeleria"
                             android:contentDescription="Papelería" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Papelería"
-                            android:textColor="#FF9800"
-                            android:textStyle="bold" />
+
                     </LinearLayout>
 
                     <!-- Ropa -->
@@ -164,12 +149,7 @@
                             android:src="@drawable/ropa"
                             android:contentDescription="Ropa" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Ropa"
-                            android:textColor="#FFEB3B"
-                            android:textStyle="bold" />
+
                     </LinearLayout>
                 </LinearLayout>
             </HorizontalScrollView>
