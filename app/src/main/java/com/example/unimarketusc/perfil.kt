@@ -1,26 +1,17 @@
 package com.example.unimarketusc
 
+import android.content.Context
 import android.net.Uri
 import android.provider.MediaStore
 import android.widget.Toast
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.asRequestBody
-import okhttp3.RequestBody.Companion.toRequestBody
 import android.os.Bundle
-import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import android.content.Intent
-import android.widget.Button
-import android.widget.CheckBox
-import android.widget.EditText
-import android.widget.TextView
-import org.json.JSONObject
-import java.io.IOException
 import com.bumptech.glide.Glide
 import com.example.unimarketusc.api.PerfilResponse
 import com.example.unimarketusc.api.RetrofitClient
@@ -31,14 +22,15 @@ import java.io.File
 
 class perfil : AppCompatActivity(){
 
-    lateinit var perfilBinding: PerfilBinding
+    private lateinit var binding: PerfilBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = PerfilBinding.inflate(layoutInflater)
-        setContentView(R.layout.perfil)
+        setContentView(binding.root)
 
         fun guardarPerfil(userId: Int, imagenUri: Uri?) {
+
             val filePart = imagenUri?.let {
                 val file = File(getRealPathFromURI(it))
                 val requestFile = file.asRequestBody("image/*".toMediaTypeOrNull())
@@ -81,6 +73,14 @@ class perfil : AppCompatActivity(){
             })
         }
     }
+    private fun getRealPathFromURI(uri: Uri): String? {
+        val projection = arrayOf(MediaStore.Images.Media.DATA)
+        val cursor = contentResolver.query(uri, projection, null, null, null)
+        return cursor?.use {
+            val columnIndex = it.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+            it.moveToFirst()
+            it.getString(columnIndex)
+        }
+    }
 
-
-}
+    }
