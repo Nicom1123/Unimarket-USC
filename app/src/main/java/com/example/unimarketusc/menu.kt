@@ -23,7 +23,7 @@ class menu : AppCompatActivity() {
         }
 
         btnUsuario.setOnClickListener {
-            val intent = Intent(this, usuario::class.java)
+            val intent = Intent(this, perfil::class.java)
             startActivity(intent)
         }
 
