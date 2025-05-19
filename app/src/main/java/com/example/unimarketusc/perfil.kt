@@ -1,12 +1,14 @@
 package com.example.unimarketusc
 
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.provider.MediaStore
 import android.widget.Toast
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.asRequestBody
 import android.os.Bundle
+import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import okhttp3.MultipartBody
 import retrofit2.Call
@@ -28,6 +30,13 @@ class perfil : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         binding = PerfilBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val btnVolver = findViewById<ImageButton>(R.id.Btnvolver)
+        btnVolver.setOnClickListener {
+            val intent = Intent(this, menu::class.java)
+            startActivity(intent)
+            finish()
+        }
 
         fun guardarPerfil(userId: Int, imagenUri: Uri?) {
 
