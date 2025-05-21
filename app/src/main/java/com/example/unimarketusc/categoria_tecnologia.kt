@@ -16,5 +16,6 @@ class categoria_tecnologia : AppCompatActivity(){
             startActivity(intent)
             finish()
         }
+
     }
 }

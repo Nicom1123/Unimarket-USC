@@ -75,6 +75,38 @@
                 android:text="Guardar cambios"
                 android:layout_marginTop="20dp"/>
 
+            <!-- Botón para agregar producto -->
+            <Button
+                android:id="@+id/btnAgregarProducto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="➕ Publicar producto"
+                android:textColor="@android:color/white"
+                android:background="#0047AB"
+                android:layout_marginTop="20dp" />
+
+            <!-- Mensaje si no hay productos -->
+            <TextView
+                android:id="@+id/txtSinProductos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Aún no tienes productos publicados"
+                android:textColor="#FF0000"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:visibility="gone"
+                android:layout_marginTop="10dp" />
+
+            <!-- Lista de productos -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerProductos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:nestedScrollingEnabled="false" />
+
+
+
             <Button
                 android:id="@+id/btnCerrarSesion"
                 android:layout_width="match_parent"
