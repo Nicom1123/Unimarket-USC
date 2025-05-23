@@ -23,12 +23,23 @@
         android:id="@+id/ingresado_aun"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="88dp"
-        android:layout_marginBottom="92dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="132dp"
         android:text="@string/ingresado_aun"
         android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/imageView"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/Registrate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Iniciar_sesion" />
+
+    <TextView
+        android:id="@+id/Registrate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="@string/Registrate"
+        android:textColor="#000000"
+        app:layout_constraintBaseline_toBaselineOf="@+id/ingresado_aun"
+        app:layout_constraintStart_toEndOf="@+id/ingresado_aun" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -38,6 +49,8 @@
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Registrate"
+        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/usc_logo" />
 
     <TextView
@@ -49,19 +62,10 @@
         android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.196"
-        app:layout_constraintStart_toEndOf="@+id/imageView" />
-
-    <TextView
-        android:id="@+id/Registrate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="100dp"
-        android:text="@string/Registrate"
-        android:textColor="#000000"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Iniciar_sesion" />
+        app:layout_constraintHorizontal_bias="0.16"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/Registrate"
+        app:layout_constraintVertical_bias="0.918" />
 
     <ImageView
         android:id="@+id/imageView3"

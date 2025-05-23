@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF">
@@ -21,24 +21,24 @@
     <!-- Logo Unimarket USC -->
     <ImageView
         android:id="@+id/imgLogo"
-        android:layout_width="200dp"
-        android:layout_height="120dp"
+        android:layout_width="308dp"
+        android:layout_height="146dp"
         android:layout_marginTop="8dp"
         android:adjustViewBounds="true"
-        android:src="@drawable/logo_usc_grande"
-        app:layout_constraintTop_toBottomOf="@id/btnBack"
+        android:src="@drawable/unimarket_usc_logo_nuevo_removebg_preview"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/btnBack" />
 
     <!-- Contenido scrollable para formularios -->
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/imgLogo"
+        android:padding="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:padding="24dp">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imgLogo">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -60,28 +60,28 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
+                android:backgroundTint="@color/blanco"
                 android:hint="@string/Correo_Institucional"
-                android:padding="12dp"
-                android:textColor="@color/black"
                 android:inputType="textEmailAddress"
-                android:backgroundTint="@color/blanco" />
+                android:padding="12dp"
+                android:textColor="@color/black" />
 
             <EditText
                 android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
+                android:backgroundTint="@color/blanco"
                 android:hint="@string/Contraseña"
                 android:inputType="textPassword"
                 android:padding="12dp"
-                android:textColor="@color/black"
-                android:backgroundTint="@color/blanco" />
+                android:textColor="@color/black" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="24dp">
+                android:layout_marginBottom="24dp"
+                android:orientation="horizontal">
 
                 <CheckBox
                     android:id="@+id/remember_me"
@@ -99,19 +99,19 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/Olvidaste_tu_contraseña"
-                    android:textSize="14sp"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <Button
                 android:id="@+id/Inicio_Sesionbtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Iniciar Sesión"
-                android:textColor="@color/blanco"
                 android:backgroundTint="#B20000"
+                android:padding="12dp"
+                android:text="Iniciar Sesión"
                 android:textAllCaps="false"
-                android:padding="12dp" />
+                android:textColor="@color/blanco" />
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
