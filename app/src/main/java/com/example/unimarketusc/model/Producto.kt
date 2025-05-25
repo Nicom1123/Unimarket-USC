@@ -8,5 +8,6 @@ data class Producto(
     val titulo: String,
     val descripcion: String,
     val precio: Double,
-    val imagen: String
+    val imagen: String,
+    val categoria: String
 ) : Serializable
