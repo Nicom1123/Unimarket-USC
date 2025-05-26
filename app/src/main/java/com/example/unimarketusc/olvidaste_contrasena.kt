@@ -1,6 +1,5 @@
 package com.example.unimarketusc
 
-import android.content.Intent
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -27,26 +26,31 @@ class olvidaste_contrasena : AppCompatActivity() {
                 return@setOnClickListener
             }
 
+            if (!correo.endsWith("@usc.edu.co")) {
+                Toast.makeText(this, "Debe ser un correo @usc.edu.co", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             val client = OkHttpClient()
             val form = FormBody.Builder()
                 .add("correo", correo)
                 .build()
 
             val request = Request.Builder()
-                .url("http://10.0.2.2/unimarket_usc/enviar_restablecer.php") // Este PHP lo crearemos
+                .url("http://192.168.56.1/unimarket_usc/enviar_restablecer.php") // Asegúrate que exista
                 .post(form)
                 .build()
 
             client.newCall(request).enqueue(object : Callback {
                 override fun onFailure(call: Call, e: IOException) {
                     runOnUiThread {
-                        Toast.makeText(this@olvidaste_contrasena, "Error de red", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@olvidaste_contrasena, "Error de red: ${e.message}", Toast.LENGTH_SHORT).show()
                     }
                 }
 
                 override fun onResponse(call: Call, response: Response) {
                     runOnUiThread {
-                        Toast.makeText(this@olvidaste_contrasena, "Correo enviado si está registrado", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this@olvidaste_contrasena, "Si el correo está registrado, se enviará un enlace para restablecer la contraseña.", Toast.LENGTH_LONG).show()
                     }
                 }
             })
@@ -59,3 +63,4 @@ class olvidaste_contrasena : AppCompatActivity() {
         }
     }
 }
+
