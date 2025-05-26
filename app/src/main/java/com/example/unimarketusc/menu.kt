@@ -27,6 +27,7 @@ class menu : AppCompatActivity() {
 
         val btnCarrito = findViewById<ImageView>(R.id.btnCarrito)
         val btnUsuario = findViewById<ImageView>(R.id.btnUsuario)
+        val btnMensajes = findViewById<ImageView>(R.id.btnMensajes)
         val imgCategoriaTecnologia = findViewById<ImageView>(R.id.imgCategoriaTecnologia)
         val imgCategoriaLibreria = findViewById<ImageView>(R.id.imgCategoriaLibreria)
         val imgCategoriaRopa = findViewById<ImageView>(R.id.imgCategoriaRopa)
@@ -59,6 +60,11 @@ class menu : AppCompatActivity() {
 
         btnUsuario.setOnClickListener {
             val intent = Intent(this, perfil::class.java)
+            startActivity(intent)
+        }
+
+        btnMensajes.setOnClickListener {
+            val intent = Intent(this, ConversacionesActivity::class.java)
             startActivity(intent)
         }
 

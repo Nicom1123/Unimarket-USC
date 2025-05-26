@@ -1,5 +1,6 @@
 package com.example.unimarketusc.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.unimarketusc.DetalleProductoActivity
 import com.example.unimarketusc.R
 import com.example.unimarketusc.model.Producto
 
@@ -32,7 +34,22 @@ class ProductoAdapter(private var productos: List<Producto>) :
         holder.descripcion.text = producto.descripcion
         holder.precio.text = "$${producto.precio}"
         Glide.with(holder.itemView.context).load(producto.imagen).into(holder.imagen)
+
+        // Abre el detalle al hacer clic
+        holder.itemView.setOnClickListener {
+            val context = holder.itemView.context
+            val intent = Intent(context, DetalleProductoActivity::class.java)
+            intent.putExtra("producto_id", producto.id)
+            intent.putExtra("titulo", producto.titulo)
+            intent.putExtra("descripcion", producto.descripcion)
+            intent.putExtra("precio", producto.precio)
+            intent.putExtra("imagen", producto.imagen)
+            intent.putExtra("vendedor_id", producto.userId) // asegúrate de tener este campo en el modelo
+            intent.putExtra("user_id", 1) // ID del usuario actual. Reemplaza por el real
+            context.startActivity(intent)
+        }
     }
+
 
     override fun getItemCount() = productos.size
 
@@ -40,4 +57,5 @@ class ProductoAdapter(private var productos: List<Producto>) :
         productos = listaFiltrada
         notifyDataSetChanged()
     }
+
 }

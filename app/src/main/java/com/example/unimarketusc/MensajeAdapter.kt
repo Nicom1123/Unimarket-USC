@@ -32,3 +32,4 @@ class MensajeAdapter(private val listaMensajes: List<Mensaje>, private val userI
 
     override fun getItemCount(): Int = listaMensajes.size
 }
+
