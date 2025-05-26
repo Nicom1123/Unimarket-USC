@@ -24,6 +24,7 @@
         <activity android:name=".categoria_ropa" />
         <activity android:name=".categoria_papeleria" />
         <activity android:name=".perfil" />
+        <activity android:name=".publicar_producto" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

@@ -33,6 +33,20 @@ class perfil : AppCompatActivity() {
         binding = PerfilBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Botón para publicar producto
+        binding.btnAgregarProducto.setOnClickListener {
+            val intent = Intent(this, publicar_producto::class.java)
+            startActivity(intent)
+        }
+
+        // Botón cerrar sesión
+        binding.btnCerrarSesion.setOnClickListener {
+            val intent = Intent(this, inicio_sesion::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            finish()
+        }
+
         // Botón volver
         val btnVolver = findViewById<ImageButton>(R.id.Btnvolver)
         btnVolver.setOnClickListener {
@@ -74,7 +88,7 @@ class perfil : AppCompatActivity() {
         val contacto = binding.etContacto.text.toString().toRequestBody()
         val userIdBody = userId.toString().toRequestBody()
 
-        RetrofitClient.instance.guardarPerfil(
+        RetrofitClient.perfilApi.guardarPerfil(
             userIdBody,
             nombre,
             direccion,
@@ -96,7 +110,7 @@ class perfil : AppCompatActivity() {
     }
 
     private fun cargarPerfil(userId: Int) {
-        RetrofitClient.instance.obtenerPerfil(userId)
+        RetrofitClient.perfilApi.obtenerPerfil(userId)
             .enqueue(object : Callback<PerfilResponse> {
                 override fun onResponse(call: Call<PerfilResponse>, response: Response<PerfilResponse>) {
                     val perfil = response.body()
