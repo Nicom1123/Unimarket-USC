@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import java.net.URLEncoder
 
 class registro : AppCompatActivity() {
     private lateinit var etName: EditText
@@ -18,12 +19,6 @@ class registro : AppCompatActivity() {
     private lateinit var cbTerms: CheckBox
     private lateinit var btnRegister: Button
     private lateinit var btnBack: ImageButton
-
-    private fun sha1(input: String): String {
-        val digest = java.security.MessageDigest.getInstance("SHA-1")
-        val result = digest.digest(input.toByteArray(Charsets.UTF_8))
-        return result.joinToString("") { "%02x".format(it) }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,7 +43,6 @@ class registro : AppCompatActivity() {
             val pwd = etPassword.text.toString()
             val confirmPwd = etConfirmPwd.text.toString()
 
-            // Validaciones
             if (name.isEmpty() || doc.isEmpty() || email.isEmpty() || pwd.isEmpty() || confirmPwd.isEmpty()) {
                 Toast.makeText(this, "Faltan datos por llenar", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
@@ -74,14 +68,24 @@ class registro : AppCompatActivity() {
     }
 
     private fun enviarCorreoDeActivacion(correo: String, clave: String) {
-        val claveSha1 = sha1(clave)
-        val url = "http://192.168.56.1/unimarket_usc/enviar_correo.php?correo=$correo&clave=$claveSha1"
-
         val queue = Volley.newRequestQueue(this)
+
+        // Codificamos los parámetros para la URL
+        val correoCodificado = URLEncoder.encode(correo, "UTF-8")
+        val claveCodificada = URLEncoder.encode(clave, "UTF-8")
+
+        val url = "http://192.168.56.1/unimarket_usc/enviar_correo.php?correo=$correoCodificado&clave=$claveCodificada"
+
         val request = StringRequest(
             Request.Method.GET, url,
             { response ->
-                Toast.makeText(this, response, Toast.LENGTH_LONG).show()
+                if (response.contains("✔️")) {
+                    Toast.makeText(this, "Correo enviado. Revisa tu bandeja de entrada", Toast.LENGTH_LONG).show()
+                    startActivity(Intent(this, inicio_sesion::class.java)) // Redirigir al login
+                    finish()
+                } else {
+                    Toast.makeText(this, "Error del servidor: $response", Toast.LENGTH_LONG).show()
+                }
             },
             { error ->
                 Toast.makeText(this, "Error al enviar el correo: ${error.message}", Toast.LENGTH_SHORT).show()
@@ -89,5 +93,4 @@ class registro : AppCompatActivity() {
         )
         queue.add(request)
     }
-
 }

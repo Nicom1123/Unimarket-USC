@@ -6,10 +6,6 @@ import android.widget.*
 import okhttp3.*
 import org.json.JSONObject
 import java.io.IOException
-import android.widget.Button
-import android.widget.CheckBox
-import android.widget.EditText
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
 class inicio_sesion : AppCompatActivity() {
@@ -19,12 +15,6 @@ class inicio_sesion : AppCompatActivity() {
     private lateinit var btnIniciar: Button
     private lateinit var cbRecordarme: CheckBox
     private lateinit var tvOlvidaste: TextView
-
-    private fun sha1(input: String): String {
-        val digest = java.security.MessageDigest.getInstance("SHA-1")
-        val result = digest.digest(input.toByteArray(Charsets.UTF_8))
-        return result.joinToString("") { "%02x".format(it) }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +26,6 @@ class inicio_sesion : AppCompatActivity() {
         cbRecordarme = findViewById(R.id.remember_me)
         tvOlvidaste = findViewById(R.id.forgot_password)
 
-        // Cargar datos si marcó "Recordarme"
         val prefs = getSharedPreferences("prefs", MODE_PRIVATE)
         if (prefs.getBoolean("remember", false)) {
             etCorreo.setText(prefs.getString("email", ""))
@@ -51,20 +40,24 @@ class inicio_sesion : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-        // Botón "Iniciar Sesión"
+
         btnIniciar.setOnClickListener {
-            val email = etCorreo.text.toString()
-            val rawPwd = etPassword.text.toString()
-            val pwd = sha1(rawPwd)  // Contraseña encriptada
+            val email = etCorreo.text.toString().trim()
+            val rawPwd = etPassword.text.toString().trim()
+
+            if (email.isEmpty() || rawPwd.isEmpty()) {
+                Toast.makeText(this, "Por favor completa todos los campos", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
             val client = OkHttpClient()
             val form = FormBody.Builder()
                 .add("email", email)
-                .add("password", pwd)
+                .add("password", rawPwd)  // 👈 YA NO ciframos aquí
                 .build()
 
             val request = Request.Builder()
-                .url("http://192.168.56.1/unimarket_usc/login.php") // 10.0.2.2 = localhost en emulador
+                .url("http://192.168.56.1/unimarket_usc/login.php")
                 .post(form)
                 .build()
 
@@ -85,14 +78,13 @@ class inicio_sesion : AppCompatActivity() {
                                 prefs.edit()
                                     .putBoolean("remember", true)
                                     .putString("email", email)
-                                    .putString("password", pwd)
+                                    .putString("password", rawPwd)
                                     .apply()
                             }
                             Toast.makeText(this@inicio_sesion, "Inicio exitoso", Toast.LENGTH_SHORT).show()
                             val intent = Intent(this@inicio_sesion, menu::class.java)
                             startActivity(intent)
                             finish()
-                            // Ir a otra actividad si quieres
                         } else {
                             Toast.makeText(this@inicio_sesion, "Credenciales incorrectas", Toast.LENGTH_SHORT).show()
                         }
@@ -101,7 +93,6 @@ class inicio_sesion : AppCompatActivity() {
             })
         }
 
-        // Texto "Olvidaste tu contraseña"
         tvOlvidaste.setOnClickListener {
             val intent = Intent(this, olvidaste_contrasena::class.java)
             startActivity(intent)
