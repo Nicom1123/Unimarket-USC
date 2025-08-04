@@ -57,7 +57,7 @@ class inicio_sesion : AppCompatActivity() {
                 .build()
 
             val request = Request.Builder()
-                .url("http://192.168.56.1/unimarket_usc/login.php")
+                .url("https://rude-lemons-guess.loca.lt/unimarket_usc/login.php")
                 .post(form)
                 .build()
 

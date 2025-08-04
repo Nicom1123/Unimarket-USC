@@ -37,7 +37,7 @@ class olvidaste_contrasena : AppCompatActivity() {
                 .build()
 
             val request = Request.Builder()
-                .url("http://192.168.56.1/unimarket_usc/enviar_restablecer.php") // Asegúrate que exista
+                .url("https://rude-lemons-guess.loca.lt/unimarket_usc/enviar_restablecer.php") // Asegúrate que exista
                 .post(form)
                 .build()
 

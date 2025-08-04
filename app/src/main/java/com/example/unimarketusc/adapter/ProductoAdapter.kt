@@ -1,5 +1,6 @@
 package com.example.unimarketusc.adapter
 
+import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
@@ -44,7 +45,7 @@ class ProductoAdapter(private var productos: List<Producto>) :
             intent.putExtra("descripcion", producto.descripcion)
             intent.putExtra("precio", producto.precio)
             intent.putExtra("imagen", producto.imagen)
-            intent.putExtra("vendedor_id", producto.userId) // asegúrate de tener este campo en el modelo
+            intent.putExtra("vendedor_id", producto.user_id) // asegúrate de tener este campo en el modelo
             intent.putExtra("user_id", 1) // ID del usuario actual. Reemplaza por el real
             context.startActivity(intent)
         }
@@ -59,3 +60,4 @@ class ProductoAdapter(private var productos: List<Producto>) :
     }
 
 }
+

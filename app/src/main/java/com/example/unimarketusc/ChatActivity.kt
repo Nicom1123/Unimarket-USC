@@ -51,7 +51,7 @@ class ChatActivity : AppCompatActivity() {
 
     private fun cargarMensajes() {
         val client = OkHttpClient()
-        val url = "http://192.168.56.1/unimarket_usc/obtener_mensajes.php?emisor_id=$userId&receptor_id=$receptorId"
+        val url = "https://rude-lemons-guess.loca.lt/unimarket_usc/obtener_mensajes.php?emisor_id=$userId&receptor_id=$receptorId"
 
         val request = Request.Builder().url(url).build()
 
@@ -94,7 +94,7 @@ class ChatActivity : AppCompatActivity() {
             .build()
 
         val request = Request.Builder()
-            .url("http://192.168.56.1/unimarket_usc/enviar_mensaje.php")
+            .url("https://rude-lemons-guess.loca.lt/unimarket_usc/enviar_mensaje.php")
             .post(form)
             .build()
 

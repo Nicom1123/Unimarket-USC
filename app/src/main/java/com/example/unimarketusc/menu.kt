@@ -20,6 +20,7 @@ class menu : AppCompatActivity() {
     private lateinit var adapter: ProductoAdapter
     private lateinit var listaOriginal: List<Producto>
     private lateinit var buscador: SearchView
+    private val userId = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,8 +66,10 @@ class menu : AppCompatActivity() {
 
         btnMensajes.setOnClickListener {
             val intent = Intent(this, ConversacionesActivity::class.java)
+            intent.putExtra("user_id", userId) // asegúrate de tener esta variable
             startActivity(intent)
         }
+
 
         imgCategoriaTecnologia.setOnClickListener {
             filtrarPorCategoria("tecnologia")
@@ -86,7 +89,7 @@ class menu : AppCompatActivity() {
 
     }
     private fun cargarProductosDesdeServidor() {
-        val url = "http://192.168.56.1/unimarket_usc/listar_todos.php"
+        val url = "https://rude-lemons-guess.loca.lt/unimarket_usc/listar_todos.php"
         val queue = Volley.newRequestQueue(this)
 
         val request = JsonArrayRequest(Request.Method.GET, url, null, { response ->

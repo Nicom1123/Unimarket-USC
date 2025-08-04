@@ -1,6 +1,8 @@
 package com.example.unimarketusc
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,11 +16,21 @@ class ConversacionesActivity : AppCompatActivity() {
 
     private lateinit var recycler: RecyclerView
     private val listaConversaciones = mutableListOf<Conversacion>()
-    private val userId = 1 // Reemplaza con tu usuario actual
+    private var userId: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_conversaciones)
+
+        userId = intent.getIntExtra("user_id", 0)
+
+        val btnVolver = findViewById<ImageButton>(R.id.Btnvolver)
+        btnVolver.setOnClickListener {
+            val intent = Intent(this, menu::class.java)
+            intent.putExtra("user_id", userId) // pasa el user_id si lo necesitas
+            startActivity(intent)
+            finish()
+        }
 
         recycler = findViewById(R.id.recyclerConversaciones)
         recycler.layoutManager = LinearLayoutManager(this)
@@ -26,9 +38,10 @@ class ConversacionesActivity : AppCompatActivity() {
         obtenerConversaciones()
     }
 
+
     private fun obtenerConversaciones() {
         val client = OkHttpClient()
-        val url = "http://192.168.56.1/unimarket_usc/listar_conversaciones.php?user_id=$userId"
+        val url = "https://rude-lemons-guess.loca.lt/unimarket_usc/listar_conversaciones.php?user_id=$userId"
 
         val request = Request.Builder().url(url).build()
 

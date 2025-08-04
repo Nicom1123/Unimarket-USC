@@ -31,29 +31,45 @@ class publicar_producto : AppCompatActivity() {
         val imgProducto = findViewById<ImageView>(R.id.imgProducto)
         val btnSeleccionar = findViewById<Button>(R.id.btnSeleccionarImagen)
         val btnPublicar = findViewById<Button>(R.id.btnPublicar)
+        val btnVolver = findViewById<ImageButton>(R.id.btnVolverProducto)
 
         val etTitulo = findViewById<EditText>(R.id.etTitulo)
         val etDescripcion = findViewById<EditText>(R.id.etDescripcion)
         val etPrecio = findViewById<EditText>(R.id.etPrecio)
         val etCategoria = findViewById<EditText>(R.id.etCategoria)
 
+        val spEstado = findViewById<Spinner>(R.id.spEstado)
+        val opcionesEstado = listOf("Nuevo", "Usado")
+        val adapterEstado = ArrayAdapter(this, android.R.layout.simple_spinner_item, opcionesEstado)
+        adapterEstado.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spEstado.adapter = adapterEstado
+
         btnSeleccionar.setOnClickListener {
             val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
             startActivityForResult(intent, PICK_IMAGE)
         }
+
+
+        btnVolver.setOnClickListener {
+            finish() // ← vuelve a la actividad anterior
+        }
+
 
         btnPublicar.setOnClickListener {
             val titulo = etTitulo.text.toString()
             val descripcion = etDescripcion.text.toString()
             val precio = etPrecio.text.toString()
             val categoria = etCategoria.text.toString()
+            val estado = spEstado.selectedItem.toString()
 
-            if (titulo.isEmpty() || descripcion.isEmpty() || precio.isEmpty() || categoria.isEmpty()) {
+            if (titulo.isEmpty() || descripcion.isEmpty() || precio.isEmpty() || categoria.isEmpty() || estado.isEmpty()) {
                 Toast.makeText(this, "Completa todos los campos", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            subirProducto(userId, titulo, descripcion, precio, categoria, imagenUri)
+
+            subirProducto(userId, titulo, descripcion, precio, categoria, estado, imagenUri)
+
         }
     }
 
@@ -63,6 +79,7 @@ class publicar_producto : AppCompatActivity() {
         descripcion: String,
         precio: String,
         categoria: String,
+        estado: String,
         imagenUri: Uri?
     ) {
         val tituloBody = titulo.toRequestBody("text/plain".toMediaTypeOrNull())
@@ -70,6 +87,7 @@ class publicar_producto : AppCompatActivity() {
         val precioBody = precio.toRequestBody()
         val categoriaBody = categoria.toRequestBody()
         val userIdBody = userId.toString().toRequestBody()
+        val estadoBody = estado.toRequestBody()
 
         val filePart = imagenUri?.let {
             val file = File(getRealPathFromURI(it))
@@ -77,8 +95,13 @@ class publicar_producto : AppCompatActivity() {
             MultipartBody.Part.createFormData("imagen", file.name, requestFile)
         }
 
+        if (filePart == null) {
+            Toast.makeText(this, "Debe seleccionar una imagen", Toast.LENGTH_SHORT).show()
+            return
+        }
+
         RetrofitClient.productoApi.crearProducto(
-            userIdBody, tituloBody, descripcionBody, precioBody, categoriaBody, filePart
+            userIdBody, tituloBody, descripcionBody, precioBody, categoriaBody, estadoBody, filePart
         ).enqueue(object : Callback<ResponseBody> {
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                 Toast.makeText(this@publicar_producto, "Producto publicado", Toast.LENGTH_SHORT).show()

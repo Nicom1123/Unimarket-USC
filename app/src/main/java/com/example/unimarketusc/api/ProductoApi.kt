@@ -18,6 +18,7 @@ interface ProductoApi {
         @Part("descripcion") descripcion: RequestBody,
         @Part("precio") precio: RequestBody,
         @Part("categoria") categoria: RequestBody,
-        @Part imagen: MultipartBody.Part?
+        @Part("estado") estado: RequestBody,
+        @Part imagen: MultipartBody.Part
     ): Call<ResponseBody>
 }

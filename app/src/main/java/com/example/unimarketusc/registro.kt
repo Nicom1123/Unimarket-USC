@@ -74,7 +74,7 @@ class registro : AppCompatActivity() {
         val correoCodificado = URLEncoder.encode(correo, "UTF-8")
         val claveCodificada = URLEncoder.encode(clave, "UTF-8")
 
-        val url = "http://192.168.56.1/unimarket_usc/enviar_correo.php?correo=$correoCodificado&clave=$claveCodificada"
+        val url = "https://rude-lemons-guess.loca.lt/unimarket_usc/enviar_correo.php?correo=$correoCodificado&clave=$claveCodificada"
 
         val request = StringRequest(
             Request.Method.GET, url,
